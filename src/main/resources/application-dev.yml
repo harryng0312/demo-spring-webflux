@@ -1,0 +1,4 @@
+# dev config
+spring:
+  webflux:
+    base-path: /demo-webflux
