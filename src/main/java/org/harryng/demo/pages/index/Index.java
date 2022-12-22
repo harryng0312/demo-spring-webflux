@@ -1,9 +1,10 @@
 package org.harryng.demo.pages.index;
 
-import io.smallrye.mutiny.Uni;
+import org.harryng.demo.pages.dto.IndexRes;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import reactor.core.publisher.Mono;
 
 import java.time.LocalDateTime;
 
@@ -11,7 +12,7 @@ import java.time.LocalDateTime;
 @RequestMapping("/index")
 public class Index {
     @RequestMapping(value = "", method = RequestMethod.GET)
-    public Uni<String> getIndex() {
-        return Uni.createFrom().item(() -> "Hello world: " + LocalDateTime.now());
+    public Mono<IndexRes> getIndex() {
+        return Mono.just(new IndexRes("" + LocalDateTime.now()));
     }
 }

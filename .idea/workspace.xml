@@ -4,25 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ac15acf5-8bfe-4c37-be1a-afdc804b9386" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gradle.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gradlew" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gradlew.bat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/settings.gradle" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/harryng/demo/Application.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/harryng/demo/config/WebConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/harryng/demo/pages/index/Index.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/application-dev.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/application-prod.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/application.yml" afterDir="false" />
+    <list default="true" id="ac15acf5-8bfe-4c37-be1a-afdc804b9386" name="Changes" comment="- init">
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/harryng/demo/pages/dto/IndexRes.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/harryng/demo/pages/index/Index.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/harryng/demo/pages/index/Index.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -90,7 +76,7 @@
       <recent name="D:\training\java\demo-spring-webflux\src\main\resources" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.[dev] demo-spring-webflux [assemble]">
+  <component name="RunManager" selected="Spring Boot.Application">
     <configuration name="[dev] demo-spring-webflux [assemble]" type="GradleRunConfiguration" factoryName="Gradle">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -156,11 +142,23 @@
       <option name="presentableId" value="Default" />
       <updated>1671591082395</updated>
       <workItem from="1671591083911" duration="2236000" />
-      <workItem from="1671610025517" duration="8173000" />
+      <workItem from="1671610025517" duration="11744000" />
     </task>
+    <task id="LOCAL-00001" summary="- init">
+      <created>1671678157723</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1671678157723</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="- init" />
+    <option name="LAST_COMMIT_MESSAGE" value="- init" />
   </component>
 </project>
