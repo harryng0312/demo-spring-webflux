@@ -34,13 +34,14 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-webflux'
     implementation 'org.springframework.session:spring-session-core'
     implementation "org.projectlombok:lombok:${lombokVersion}"
+//    implementation "io.smallrye.reactive:mutiny:${mutinyVersion}"
 
     annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
     annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
 
     testImplementation "org.projectlombok:lombok:${lombokVersion}"
     testAnnotationProcessor "org.projectlombok:lombok:${lombokVersion}"
-//    implementation "io.smallrye.reactive:mutiny:${mutinyVersion}"
+
 
     testImplementation "org.springframework.boot:spring-boot-starter-test"
     testImplementation "org.junit.jupiter:junit-jupiter-api:${junitJupiterVersion}"
