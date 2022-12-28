@@ -1,3 +1,10 @@
 spring:
   profiles:
     active: ${env}
+
+logging:
+  level:
+    root: info
+  file:
+    name: demo-flux
+    path: demo-log

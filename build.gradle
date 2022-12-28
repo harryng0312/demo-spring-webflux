@@ -32,6 +32,7 @@ processResources {
 
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-webflux'
+    implementation 'org.springframework.boot:spring-boot-starter-logging'
     implementation "org.springframework.boot:spring-boot-starter-data-r2dbc"
     implementation 'org.springframework.session:spring-session-core'
 

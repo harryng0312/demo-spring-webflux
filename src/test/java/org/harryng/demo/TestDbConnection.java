@@ -4,6 +4,7 @@ import io.r2dbc.spi.*;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 import java.util.Collections;
 import java.util.LinkedHashMap;
@@ -25,7 +26,7 @@ public class TestDbConnection {
                 .option(PASSWORD, "123456")
                 .option(DATABASE, "test_db") // optional
                 .option(SSL, false) // optional, defaults to false
-                .option(Option.valueOf("applicationName"), "test_db") // optional
+                .option(Option.valueOf("applicationName"), "test_db1") // optional
                 .option(Option.valueOf("preferCursoredExecution"), false) // optional
                 .option(Option.valueOf("connectionId"), UUID.randomUUID()) // optional
                 .build();
@@ -34,48 +35,70 @@ public class TestDbConnection {
     }
 
     @Test
-    public void select() {
+    public void select() throws InterruptedException {
         ConnectionFactory connectionFactory = getConnectionFactory();
         // Publisher<? extends Connection> connectionPublisher = connectionFactory.create();
         // Alternative: Creating a Mono using Project Reactor
         final Map<String, Object> statesMap = Collections.synchronizedMap(new LinkedHashMap<>());
-        Flux<Result> connectionFlux = Flux.from(connectionFactory.create())
+        Mono.from(connectionFactory.create())
                 .flatMap(connection -> {
-//                    statesMap.put("connection", connection);
-//                    return Flux.from(connection.setAutoCommit(false));
-//                }).flatMap(v -> {
-//                    Connection connection = (Connection) statesMap.get("connection");
-//                    return Flux.from(connection.beginTransaction());
-//                }).flatMap(v -> {
-//                    Connection connection = (Connection) statesMap.get("connection");
+                    statesMap.put("connection", connection);
+                    return Mono.from(connection.setAutoCommit(false));
+                }).flatMap(v -> {
+                    Connection connection = (Connection) statesMap.get("connection");
+                    return Mono.from(connection.beginTransaction());
+                }).flatMap(v -> {
+                    Connection connection = (Connection) statesMap.get("connection");
+                    log.info("Creating the stmt...");
                     Statement statement = connection.createStatement("select * from user_");
-                    return Flux.from(statement.execute());
-//                }).flatMap(result -> Flux.from(result.map((row, rowMetadata) -> {
-//                    log.info("Name[]: %s", row.get("name_"));
-//                    return null;
-//                }))).flatMap(v -> {
-//                    Connection connection = (Connection) statesMap.get("connection");
-//                    return Flux.from(connection.commitTransaction());
-//                }).onErrorContinue((ex, obj) -> {
-//                    Connection connection = (Connection) statesMap.get("connection");
-//                    Flux.from(connection.rollbackTransaction()).subscribe();
-//                }).doFinally(signalType -> {
-//                    Connection connection = (Connection) statesMap.get("connection");
-//                    Flux.from(connection.close()).subscribe();
-                });
-        connectionFlux.flatMapSequential(result -> Flux.from(result.map((row, rowMetadata) -> {
-            log.info("Name[]: %s", row.get("name_"));
-            return row;
-        }))).subscribe(connection -> log.info("Start select..."), throwable -> {
-        });
+                    return Mono.from(statement.execute());
+                }).flatMapMany(result -> Flux.from(result.map((row, rowMetadata) -> {
+                    log.info(String.format("Name[]: %s", row.get("name_")));
+                    return row;
+                }))).flatMap(v -> {
+                    Connection connection = (Connection) statesMap.get("connection");
+                    return Flux.from(connection.commitTransaction());
+                }).onErrorContinue((ex, obj) -> {
+                    Connection connection = (Connection) statesMap.get("connection");
+                    Flux.from(connection.rollbackTransaction()).subscribe();
+                }).doFinally(signalType -> {
+                    Connection connection = (Connection) statesMap.get("connection");
+                    Flux.from(connection.close()).subscribe();
+                }).subscribe(unused -> log.info("Start select..."));
+//        connectionMono.flux().flatMap(result -> Flux.from(result.map((row, rowMetadata) -> {
+//            log.info(String.format("Name[%s]: %s", "name_", row.get("name_")));
+//            return row;
+//        }))).subscribe(connection -> log.info("Start select..."));
+        Thread.sleep(5_000);
+    }
+
+    @Test
+    public void select1() throws InterruptedException {
+        ConnectionFactory connectionFactory = getConnectionFactory();
+        // Publisher<? extends Connection> connectionPublisher = connectionFactory.create();
+        // Alternative: Creating a Mono using Project Reactor
+        final Map<String, Object> statesMap = Collections.synchronizedMap(new LinkedHashMap<>());
+        Mono.from(connectionFactory.create())
+                .flatMap(connection -> {
+                    statesMap.put("connection", connection);
+                    log.info("Creating the stmt...");
+                    Statement statement = connection.createStatement("select * from user_");
+                    return Mono.from(statement.execute());
+                }).flatMapMany(result -> Flux.from(result.map((row, rowMetadata) -> {
+                    log.info(String.format("Name[]: %s", row.get("name_")));
+                    return row;
+                }))).doFinally(signalType -> {
+                    Connection connection = (Connection) statesMap.get("connection");
+                    Flux.from(connection.close()).subscribe();
+                }).subscribe(unused -> log.info("Start select..."));
+        Thread.sleep(5_000);
     }
 
     @Test
     public void test() {
-        Flux.just("1").map(itm -> {
+        Mono.just("1").flux().flatMap(itm -> {
             log.info("test:" + itm);
-            return itm;
-        }).subscribe(s -> log.info("Start test..."), throwable -> {
-        });
+            return Flux.just(itm);
+        }).subscribe(s -> log.info("Start test..."));
     }
 }
