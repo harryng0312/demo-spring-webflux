@@ -4,13 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ac15acf5-8bfe-4c37-be1a-afdc804b9386" name="Changes" comment="- init">
-      <change afterPath="$PROJECT_DIR$/logback-spring.xml_" afterDir="false" />
+    <list default="true" id="ac15acf5-8bfe-4c37-be1a-afdc804b9386" name="Changes" comment="- db connection without pool">
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/harryng/demo/config/DbConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/org/harryng/demo/TestDbConnectionPool.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gradle.properties" beforeDir="false" afterPath="$PROJECT_DIR$/gradle.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logback-spring.xml_" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/logback-spring.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application-dev.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application-dev.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/org/harryng/demo/TestDbConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/org/harryng/demo/TestDbConnection.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,6 +42,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MarkdownSettingsMigration">
@@ -60,7 +67,7 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/training/java/demo-spring-webflux/src/main/resources&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/training/java/demo-spring-webflux/src/test/resources&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -80,37 +87,18 @@
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\training\java\demo-spring-webflux\src\test\resources" />
       <recent name="D:\training\java\demo-spring-webflux\src\main\resources" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\training\java\demo-spring-webflux" />
     </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="org.harryng.demo" />
+    </key>
   </component>
-  <component name="RunManager" selected="Gradle.TestDbConnection.select1">
-    <configuration name="TestDbConnection.select" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="-Penv=dev" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value=":test" />
-            <option value="--tests" />
-            <option value="&quot;org.harryng.demo.TestDbConnection.select&quot;" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <method v="2" />
-    </configuration>
-    <configuration name="TestDbConnection.select1" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+  <component name="RunManager" selected="Gradle.TestDbConnectionPool.select1">
+    <configuration name="TestDbConnectionPool.select1" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -123,7 +111,7 @@
           <list>
             <option value=":test" />
             <option value="--tests" />
-            <option value="&quot;org.harryng.demo.TestDbConnection.select1&quot;" />
+            <option value="&quot;org.harryng.demo.TestDbConnectionPool.select1&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -133,7 +121,7 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="TestDbConnection.test" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="TestDbConnectionPool.test" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -146,7 +134,7 @@
           <list>
             <option value=":test" />
             <option value="--tests" />
-            <option value="&quot;org.harryng.demo.TestDbConnection.test&quot;" />
+            <option value="&quot;org.harryng.demo.TestDbConnectionPool.test&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -209,16 +197,14 @@
     <list>
       <item itemvalue="Gradle.demo-spring-webflux [clean]" />
       <item itemvalue="Gradle.[dev] demo-spring-webflux [assemble]" />
-      <item itemvalue="Gradle.TestDbConnection.select1" />
-      <item itemvalue="Gradle.TestDbConnection.test" />
-      <item itemvalue="Gradle.TestDbConnection.select" />
+      <item itemvalue="Gradle.TestDbConnectionPool.select1" />
+      <item itemvalue="Gradle.TestDbConnectionPool.test" />
       <item itemvalue="Spring Boot.Application" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Gradle.TestDbConnection.select1" />
-        <item itemvalue="Gradle.TestDbConnection.select" />
-        <item itemvalue="Gradle.TestDbConnection.test" />
+        <item itemvalue="Gradle.TestDbConnectionPool.select1" />
+        <item itemvalue="Gradle.TestDbConnectionPool.test" />
       </list>
     </recent_temporary>
   </component>
@@ -242,6 +228,9 @@
       <workItem from="1672195704968" duration="74000" />
       <workItem from="1672196040306" duration="6720000" />
       <workItem from="1672204689083" duration="233000" />
+      <workItem from="1672222537134" duration="61000" />
+      <workItem from="1672279823760" duration="5759000" />
+      <workItem from="1672367172578" duration="1204000" />
     </task>
     <task id="LOCAL-00001" summary="- init">
       <created>1671678157723</created>
@@ -271,7 +260,14 @@
       <option name="project" value="LOCAL" />
       <updated>1672128906351</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="- db connection without pool">
+      <created>1672222589564</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1672222589564</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -279,6 +275,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="- init" />
-    <option name="LAST_COMMIT_MESSAGE" value="- init" />
+    <MESSAGE value="- db connection without pool" />
+    <option name="LAST_COMMIT_MESSAGE" value="- db connection without pool" />
   </component>
 </project>

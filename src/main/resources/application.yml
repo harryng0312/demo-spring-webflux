@@ -4,7 +4,12 @@ spring:
 
 logging:
   level:
-    root: info
+    root: "INFO"
+    io:
+      r2dbc: "INFO"
+      netty: "INFO"
+    org.springframework:
+      r2dbc: "INFO"
   file:
     name: demo-flux
     path: demo-log
