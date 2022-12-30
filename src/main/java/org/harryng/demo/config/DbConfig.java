@@ -1,5 +1,7 @@
 package org.harryng.demo.config;
 
+import io.r2dbc.pool.ConnectionPool;
+import io.r2dbc.pool.ConnectionPoolConfiguration;
 import io.r2dbc.spi.ConnectionFactories;
 import io.r2dbc.spi.ConnectionFactory;
 import io.r2dbc.spi.ConnectionFactoryOptions;
@@ -11,6 +13,7 @@ import org.springframework.data.r2dbc.repository.config.EnableR2dbcRepositories;
 import org.springframework.r2dbc.connection.R2dbcTransactionManager;
 import org.springframework.transaction.ReactiveTransactionManager;
 
+import java.time.Duration;
 import java.util.UUID;
 
 import static io.r2dbc.spi.ConnectionFactoryOptions.*;
@@ -18,11 +21,10 @@ import static io.r2dbc.spi.ConnectionFactoryOptions.SSL;
 
 @Configuration
 @EnableR2dbcRepositories
-public class DbConfig extends AbstractR2dbcConfiguration {
+public class DbConfig {
 
-    @Override
-    @Bean
-    public ConnectionFactory connectionFactory() {
+    //    @Bean
+    public ConnectionFactory getConnectionFactory() {
         ConnectionFactoryOptions options = builder()
                 .option(DRIVER, "sqlserver")
                 .option(HOST, "localhost")
@@ -40,7 +42,16 @@ public class DbConfig extends AbstractR2dbcConfiguration {
     }
 
     @Bean
-    public ReactiveTransactionManager transactionManager(ConnectionFactory connectionFactory) {
+    public ConnectionPool getConnectionPool() {
+        ConnectionPoolConfiguration poolConfiguration = ConnectionPoolConfiguration.builder(getConnectionFactory())
+                .initialSize(5)
+                .maxSize(10)
+                .maxIdleTime(Duration.ofMinutes(5)).build();
+        return new ConnectionPool(poolConfiguration);
+    }
+
+    @Bean
+    public ReactiveTransactionManager getTransactionManager(ConnectionFactory connectionFactory) {
         return new R2dbcTransactionManager(connectionFactory);
     }
 }
