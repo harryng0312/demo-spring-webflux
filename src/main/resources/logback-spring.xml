@@ -24,7 +24,7 @@
         </encoder>
     </appender>
 
-<!--    <logger name="io.r2dbc" level="INFO"/>-->
+    <logger name="io.r2dbc" level="debug"/>
 
     <logger name="org.apache.http" level="INFO"/>
     <logger name="org.springframework.web.client.RestTemplate" level="INFO"/>

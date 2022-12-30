@@ -29,34 +29,49 @@ public class TestDbConnectionPool {
         final Map<String, Object> statesMap = Collections.synchronizedMap(new LinkedHashMap<>());
         Mono.from(connectionFactory.create())
                 .flatMap(connection -> {
+                    log.info("Starting query ...");
                     statesMap.put("connection", connection);
-                    return Mono.from(connection.setAutoCommit(false));
-                }).flatMap(v -> {
-                    Connection connection = (Connection) statesMap.get("connection");
-                    return Mono.from(connection.beginTransaction());
-                }).flatMap(v -> {
-                    Connection connection = (Connection) statesMap.get("connection");
+                    return Mono.from(connection.setAutoCommit(false)).thenReturn(connection);
+                }).flatMap(connection -> {
+                    log.info("Begin trans ...");
+                    return Mono.from(connection.beginTransaction()).thenReturn(connection);
+                }).flatMap(connection -> {
                     log.info("Creating the stmt...");
                     Statement statement = connection.createStatement("select * from user_");
                     return Mono.from(statement.execute());
-                }).flatMapMany(result -> Flux.from(result.map((row, rowMetadata) -> {
+                })
+                .onErrorResume(throwable -> {
+                    Connection connection = (Connection) statesMap.get("connection");
+                    log.error("Rolling back first ...", throwable);
+                    return Mono.from(connection.rollbackTransaction()).flatMap(unused -> Mono.empty());
+                })
+                .flatMapMany(result -> Flux.from(result.map((row, rowMetadata) -> {
                     log.info(String.format("Name[]: %s", row.get("name_")));
                     return row;
-                }))).flatMap(v -> {
+                })))
+                .collectList()
+//                .map(rows -> {
+//                    rows.forEach(row -> log.info(String.format("List: Name[]: %s", row.get("name_"))));
+//                    return rows;
+//                })
+                .flatMap(v -> {
                     Connection connection = (Connection) statesMap.get("connection");
-                    return Flux.from(connection.commitTransaction());
-                }).onErrorContinue((ex, obj) -> {
+                    log.info("Committing ...");
+                    return Mono.from(connection.commitTransaction()).thenReturn(1);
+                }).onErrorResume((ex) -> {
                     Connection connection = (Connection) statesMap.get("connection");
-                    Flux.from(connection.rollbackTransaction()).subscribe();
-                }).doFinally(signalType -> {
+                    log.info("Rolling back ...");
+                    return Mono.from(connection.rollbackTransaction()).thenReturn(0);
+                })
+                .doOnSuccess(integer -> {})
+                .flatMap(s -> {
+                    log.info("Closed conn ...");
                     Connection connection = (Connection) statesMap.get("connection");
-                    Flux.from(connection.close()).subscribe();
-                }).subscribe(unused -> log.info("Start select..."));
-//        connectionMono.flux().flatMap(result -> Flux.from(result.map((row, rowMetadata) -> {
-//            log.info(String.format("Name[%s]: %s", "name_", row.get("name_")));
-//            return row;
-//        }))).subscribe(connection -> log.info("Start select..."));
-        Thread.sleep(5_000);
+                    return Mono.from(connection.close()).then();
+                })
+                .block();
+//                .subscribe(unused -> log.info("Start select..."));
+//        Thread.sleep(5_000);
     }
 
     @Test
@@ -73,9 +88,9 @@ public class TestDbConnectionPool {
                 }).flatMapMany(result -> Flux.from(result.map((row, rowMetadata) -> {
                     log.info(String.format("Name[]: %s", row.get("name_")));
                     return row;
-                }))).doFinally(signalType -> {
+                }))).collectList().map(rows -> rows).doFinally(signalType -> {
                     Connection connection = (Connection) statesMap.get("connection");
-                    Flux.from(connection.close()).subscribe();
+                    Mono.from(connection.close());
                 }).subscribe(unused -> log.info("Start select..."));
         Thread.sleep(5_000);
     }

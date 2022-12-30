@@ -50,7 +50,7 @@ public class DbConfig {
         return new ConnectionPool(poolConfiguration);
     }
 
-    @Bean
+    //    @Bean
     public ReactiveTransactionManager getTransactionManager(ConnectionFactory connectionFactory) {
         return new R2dbcTransactionManager(connectionFactory);
     }

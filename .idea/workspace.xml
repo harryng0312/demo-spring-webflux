@@ -4,9 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ac15acf5-8bfe-4c37-be1a-afdc804b9386" name="Changes" comment="- db connection without pool">
+    <list default="true" id="ac15acf5-8bfe-4c37-be1a-afdc804b9386" name="Changes" comment="- db connection with pool">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/harryng/demo/config/DbConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/harryng/demo/config/DbConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/logback-spring.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/logback-spring.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/org/harryng/demo/TestDbConnectionPool.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/org/harryng/demo/TestDbConnectionPool.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -91,7 +93,30 @@
       <recent name="org.harryng.demo" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.TestDbConnectionPool.select1">
+  <component name="RunManager" selected="Gradle.TestDbConnectionPool.select">
+    <configuration name="TestDbConnectionPool.select" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="-Penv=dev" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;org.harryng.demo.TestDbConnectionPool.select&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
     <configuration name="TestDbConnectionPool.select1" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -191,12 +216,14 @@
     <list>
       <item itemvalue="Gradle.demo-spring-webflux [clean]" />
       <item itemvalue="Gradle.[dev] demo-spring-webflux [assemble]" />
+      <item itemvalue="Gradle.TestDbConnectionPool.select" />
       <item itemvalue="Gradle.TestDbConnectionPool.select1" />
       <item itemvalue="Gradle.TestDbConnectionPool.test" />
       <item itemvalue="Spring Boot.Application" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.TestDbConnectionPool.select" />
         <item itemvalue="Gradle.TestDbConnectionPool.select1" />
         <item itemvalue="Gradle.TestDbConnectionPool.test" />
       </list>
@@ -224,7 +251,7 @@
       <workItem from="1672204689083" duration="233000" />
       <workItem from="1672222537134" duration="61000" />
       <workItem from="1672279823760" duration="5759000" />
-      <workItem from="1672367172578" duration="1729000" />
+      <workItem from="1672367172578" duration="8491000" />
     </task>
     <task id="LOCAL-00001" summary="- init">
       <created>1671678157723</created>
@@ -268,7 +295,14 @@
       <option name="project" value="LOCAL" />
       <updated>1672372246615</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="- db connection with pool">
+      <created>1672372729285</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1672372729285</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -277,6 +311,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="- init" />
     <MESSAGE value="- db connection without pool" />
-    <option name="LAST_COMMIT_MESSAGE" value="- db connection without pool" />
+    <MESSAGE value="- db connection with pool" />
+    <option name="LAST_COMMIT_MESSAGE" value="- db connection with pool" />
   </component>
 </project>
