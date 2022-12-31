@@ -39,22 +39,12 @@ public class TestDbConnectionPool {
                     log.info("Creating the stmt...");
                     Statement statement = connection.createStatement("select * from user_");
                     return Mono.from(statement.execute());
-                })
-                .onErrorResume(throwable -> {
-                    Connection connection = (Connection) statesMap.get("connection");
-                    log.error("Rolling back first ...", throwable);
-                    return Mono.from(connection.rollbackTransaction()).flatMap(unused -> Mono.empty());
-                })
-                .flatMapMany(result -> Flux.from(result.map((row, rowMetadata) -> {
-                    log.info(String.format("Name[]: %s", row.get("name_")));
-                    return row;
-                })))
-                .collectList()
-//                .map(rows -> {
-//                    rows.forEach(row -> log.info(String.format("List: Name[]: %s", row.get("name_"))));
-//                    return rows;
-//                })
-                .flatMap(v -> {
+                }).flatMapMany(result -> Flux.from(result.map((row, rowMetadata) -> Collections.singletonMap("name_", row.get("name_")))))
+                .collectList().map(rows -> {
+                    log.info("Rows list size: {}", rows.size());
+                    rows.forEach(row -> log.info("List: Name['name_']: {}", row.get("name_")));
+                    return rows;
+                }).flatMap(rows -> {
                     Connection connection = (Connection) statesMap.get("connection");
                     log.info("Committing ...");
                     return Mono.from(connection.commitTransaction()).thenReturn(1);
@@ -62,10 +52,8 @@ public class TestDbConnectionPool {
                     Connection connection = (Connection) statesMap.get("connection");
                     log.info("Rolling back ...");
                     return Mono.from(connection.rollbackTransaction()).thenReturn(0);
-                })
-                .doOnSuccess(integer -> {})
-                .flatMap(s -> {
-                    log.info("Closed conn ...");
+                }).flatMap(resInteger -> {
+                    log.info("Return code {}\nClosed conn ...", resInteger);
                     Connection connection = (Connection) statesMap.get("connection");
                     return Mono.from(connection.close()).then();
                 })

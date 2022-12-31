@@ -7,7 +7,6 @@
     <list default="true" id="ac15acf5-8bfe-4c37-be1a-afdc804b9386" name="Changes" comment="- db connection with pool">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/harryng/demo/config/DbConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/harryng/demo/config/DbConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/logback-spring.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/logback-spring.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/org/harryng/demo/TestDbConnectionPool.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/org/harryng/demo/TestDbConnectionPool.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -81,6 +80,9 @@
     ]
   }
 }</component>
+  <component name="ReactorSettings">
+    <option name="notificationShown" value="true" />
+  </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\training\java\demo-spring-webflux\src\test\resources" />
@@ -251,7 +253,9 @@
       <workItem from="1672204689083" duration="233000" />
       <workItem from="1672222537134" duration="61000" />
       <workItem from="1672279823760" duration="5759000" />
-      <workItem from="1672367172578" duration="8491000" />
+      <workItem from="1672367172578" duration="8516000" />
+      <workItem from="1672382749848" duration="2194000" />
+      <workItem from="1672460966847" duration="210000" />
     </task>
     <task id="LOCAL-00001" summary="- init">
       <created>1671678157723</created>
@@ -302,7 +306,14 @@
       <option name="project" value="LOCAL" />
       <updated>1672372729285</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="- db connection with pool">
+      <created>1672379498841</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1672379498841</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
